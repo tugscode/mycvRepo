@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
+import { Module, ValidationPipe, MiddlewareConsumer } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +16,6 @@ const cookieSession = require('cookie-session');
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    UsersModule,
-    ReportsModule,
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
@@ -35,6 +33,8 @@ const cookieSession = require('cookie-session');
     //   entities: [User, Report],
     //   synchronize: true,
     // }),
+    UsersModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -52,9 +52,9 @@ export class AppModule {
     consumer
       .apply(
         cookieSession({
-          keys: ['asdfasdf'],
+          keys: ['asdfasfd'],
         }),
       )
-      .forRoutes('*s');
+      .forRoutes('*');
   }
 }

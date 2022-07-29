@@ -1,6 +1,6 @@
 ### Create a new user
 POST  http://localhost:3000/auth/signup
-Content-Type: application/json
+content-Type: application/json
 
 {
   "email": "admin@test.com",

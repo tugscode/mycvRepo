@@ -1,6 +1,6 @@
 import {
-  BadRequestException,
   Injectable,
+  BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -13,7 +13,7 @@ const scrypt = promisify(_scrypt);
 export class AuthService {
   constructor(private usersService: UsersService) {}
 
-  async singup(email: string, password: string) {
+  async signup(email: string, password: string) {
     // See if email is in use
     const users = await this.usersService.find(email);
     if (users.length) {
@@ -37,7 +37,7 @@ export class AuthService {
     return user;
   }
 
-  async singin(email: string, password: string) {
+  async signin(email: string, password: string) {
     const [user] = await this.usersService.find(email);
     if (!user) {
       throw new NotFoundException('user not found');
